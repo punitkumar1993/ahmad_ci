@@ -25,10 +25,21 @@ class UserModel extends CI_Model {
 	}
 
 	public function getData(){
-
+		$query =  $this->db->query('select * from tbl_users');
+		return $query->result_array();
 	}
 
-	public function DeleteData(){
+	public function getDataByUserId($userId){
+		$query =  $this->db->query("select * from tbl_users where id=$userId");
+		return $query->result_array();
+	}
 
+	public function updateData ($userDataArray, $userId){
+		$this->db->where('id', $userId);
+		return $this->db->update('tbl_users', $userDataArray);
+	}
+	public function DeleteData($userId){
+		$this->db->where('id', $userId);
+		return $this->db->delete('tbl_users');
 	}
 }

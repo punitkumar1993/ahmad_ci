@@ -38,7 +38,44 @@ class UserController extends CI_Controller {
 
 		$result = $this->UM->inserData($userData);
 		if($result){
-			echo "data has been added successfully";
+			$this->session->set_flashdata('msg', 'User has been created successfully');
+			return redirect('users/show-users');
+		}
+
+	}
+	/**
+	* show all users
+	*/
+	public function showUsers(){
+		$userdata = array();
+		$userdata['users'] = $this->UM->getData();
+		$this->load->view('users/show_users', $userdata);
+	}
+
+	public function editUser($userId){
+
+		$userdata = array();
+		$userdata['users'] = $this->UM->getDataByUserId($userId);
+		$this->load->view('users/edit_user', $userdata);
+	}
+
+	public function updateUser(){
+		$name = $this->input->post('name');
+		$email = $this->input->post('email');
+		$userId = $this->input->post('user_id');
+		$userDataArray = array('name' => $name, 'email' => $email);
+		$result = $this->UM->updateData($userDataArray, $userId);
+		if($result){
+			$this->session->set_flashdata('msg', 'User has been updated successfully');
+			return redirect('users/show-users');
+		}
+	}
+
+	public function deleteUser($userId){
+		$result = $this->UM->DeleteData($userId);
+		if($result){
+			$this->session->set_flashdata('msg', 'User has been deleted successfully');
+			return redirect('users/show-users');
 		}
 	}
 }

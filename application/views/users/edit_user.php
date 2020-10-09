@@ -11,21 +11,24 @@
 <body>
 
 <div class="container">
-  <h2>Vertical (basic) form</h2>
-  
-  <form action="<?php echo base_url('users/add-user')?>" method="post">
+  <h2>Edit User Form</h2>
+  <?php if($this->session->flashdata('msg')) { ?>
+    <div class="alert alert-success"><?php echo $this->session->flashdata('msg'); ?> </div>
+  <?php } ?>
+  <form action="<?php echo base_url('users/update-user-data')?>" method="post">
+    <input type="hidden" name="user_id" value="<?php echo $users[0]['id'] ?>">
     <div class="form-group">
       <label for="email">Name:</label>
-      <input type="text" class="form-control" id="email" placeholder="Enter name" name="name">
+      <input type="text" class="form-control" id="email" placeholder="Enter name" value="<?php echo $users[0]['name'] ?>" name="name">
     </div>
     <div class="form-group">
       <label for="pwd">Email:</label>
-      <input type="email" class="form-control" id="pwd" placeholder="Enter email" name="email">
+      <input type="email" class="form-control" id="pwd" placeholder="Enter email" value="<?php echo $users[0]['email'] ?>" name="email">
     </div>
   <!--   <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div> -->
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default">Update</button>
   </form>
 </div>
 

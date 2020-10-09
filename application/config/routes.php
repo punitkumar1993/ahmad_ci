@@ -54,3 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['users'] = 'UserController/users';//Controller/method
 $route['users/add-user'] = 'UserController/addUser';//Controller/method
+$route['users/show-users'] = 'UserController/showUsers';//Controller/method
+$route['users/update-user/(:any)'] = 'UserController/editUser/$1';//Controller/method
+
+$route['users/update-user-data'] = 'UserController/updateUser';
+$route['users/delete-user/(:any)'] = 'UserController/DeleteUser/$1';//Controller/method
